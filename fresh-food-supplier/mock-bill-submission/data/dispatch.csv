@@ -1,0 +1,5 @@
+customer_id,customer_name,order_count,route_warehouse
+C001,某机关食堂,2,中央仓A
+C003,某连锁餐饮,6,前置仓B
+C002,某幼儿园,1,前置仓B
+C004,盒马,1,中央仓A
