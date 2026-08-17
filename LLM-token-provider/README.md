@@ -51,6 +51,8 @@ D token-review         真实赚不赚钱：真实毛利复盘 + 偏差诊断 + 
 报告渲染器 (xxx_report.py)  → HTML   ← 给老板/客户看，每个数字都来自 JSON
 ```
 
+> **渲染器输入兼容性（A 已实现，2026-08-17）**：渲染器自动识别两种输入——① 计算器直接输出的**平铺结构**（此时定价/市场对标/风险区块显示"待 AI 编排层补充"占位）；② AI 编排层补齐 `cost_model`/`pricing_suggestion`/`market_comparison`/`risks`/`summary` 后的**完整结构**（全区块渲染）。直接跑"计算器 → 渲染器"链路不再丢数据。
+
 脚本位置（相对项目根目录，输出统一进 `test/LLM-token-provider/`）：
 
 | Skill | 计算器 | 报告渲染器 | 输出（JSON + HTML） |

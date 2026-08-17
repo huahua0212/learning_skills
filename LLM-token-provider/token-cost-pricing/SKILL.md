@@ -264,10 +264,12 @@ python3 LLM-token-provider/token-cost-pricing/cost_calculator.py \
 
 JSON 是给机器和你的，HTML 是给老板/演示看的。**HTML 由配套渲染脚本 `pricing_report.py` 从 JSON 生成（数字同源、禁止手填）**，与 token-reconciliation / token-review 的渲染脚本同一模式：
 
+> **渲染器输入兼容两种结构（2026-08-17）**：① 直接喂 `cost_calculator.py` 的平铺输出——成本数字完整渲染，定价/市场对标/风险区块显示"待 AI 编排层补充"占位；② 喂 AI 编排层补齐 `cost_model`/`pricing_suggestion`/`market_comparison`/`risks`/`summary` 的完整结构——全区块渲染。两种都支持，不再丢数据。
+
 ```bash
-# 1) 计算（产出 JSON）
+# 1) 计算（产出 JSON，平铺结构）
 python3 LLM-token-provider/token-cost-pricing/cost_calculator.py ... > test/LLM-token-provider/token_cost_pricing_output.json
-# 2) 渲染 HTML（读 JSON 生成，数字同源）
+# 2) 渲染 HTML（读 JSON 生成，数字同源；平铺或完整结构均可）
 python3 LLM-token-provider/token-cost-pricing/pricing_report.py \
   --input test/LLM-token-provider/token_cost_pricing_output.json \
   --output test/LLM-token-provider/token_pricing_report_<YYYY-MM-DD>.html \
